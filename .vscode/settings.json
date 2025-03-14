@@ -3,6 +3,7 @@
         "arvore.h": "c",
         "string.h": "c",
         "stdbool.h": "c",
-        "cidade.h": "c"
+        "cidade.h": "c",
+        "ordenacao.h": "c"
     }
 }

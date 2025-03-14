@@ -9,9 +9,13 @@
 typedef struct cidade{
     char nome[100];
     TEvento eventos[max_e];
+    int index_c;
 } TCidades;
 
 void Armazenar_Cidades(char *cidade);
 void preencherCidades(TCidades cidade[]);
+
+void *Buscar(char *Nomecidade, TCidades *cidades);
+void Buscar_Eventos();
 
 #endif

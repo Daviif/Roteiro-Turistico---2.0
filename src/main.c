@@ -1,6 +1,7 @@
 #include "funcoes/arvore.c"
 #include "funcoes/cidade.c"
 #include "funcoes/evento.c"
+#include "funcoes/ordenacao.c"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -43,9 +44,9 @@ int main(){
         {
             case 1:
                 printf("1 - Listar inOrdem\n2 - Listar em Pre-Ordem\n3 - Listar em Pos-Ordem\n");
-                int opcao2;
-                scanf("%d", &opcao2);
-                switch (opcao2){
+                int opListar;
+                scanf("%d", &opListar);
+                switch (opListar){
                     case 1:
                         inOrdem(Arvore.raiz);
                         break;
@@ -61,9 +62,9 @@ int main(){
                 break;
             case 2:
                 printf("\n1 - Bubble Sort\n2 - Selection Sort\n3 - Insertion Sort\n4 - Shell Sort\n5 - Quick Sort\n6 - Merge Sort\n7 - Heap Sort\n");
-                /*int opcao3;
-                scanf("%d", &opcao3);
-                switch (opcao3){
+                /*int opOrdenar;
+                scanf("%d", &opOrdenar);
+                switch (opOrdenar){
                     case 1:
                         BubbleSort(cidades);
                         break;
@@ -91,12 +92,43 @@ int main(){
                 break;*/
             case 3:
                 printf("Você deseja buscar por:\n1 - Cidade\n2 - Evento\n");
-                int opcao4;
-                scanf("%d", &opcao4);
-                if (opcao4 == 1){
-                    /* code */
+                int opBuscar;
+                scanf("%d", &opBuscar);
+                getchar();
+                char nome[100];
+                if(opBuscar == 1){
+                    printf("Digite o nome da cidade: ");
+                    fflush(stdin);
+                    fgets(nome, 100, stdin);
+                    if (nome[strlen(nome)-1] == '\n') {
+                        nome[strlen(nome)-1] = '\0';
+                    }
+                    
+                    Buscar(nome, cidades);
                 }
-                
+                else if (opBuscar == 2)
+                {
+                    printf("1 - Melhor Avaliação\n2 - Pior Avaliação\n3 - Tipo\n4 - Nome\n");
+                    int opBuscarEv;
+                    scanf("%d", &opBuscarEv);
+                    switch (opBuscarEv)
+                    {
+                    case 1:
+                        
+                        break;
+                    case 2:
+                        Mergesort(cidades,0, 4);
+                        printf("Eventos ordenados pela pior avaliação\n");
+                        imprimirAvaliacoes(cidades);
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    default:
+                        break;
+                    }
+                }
                 
                 break;
             case 4:

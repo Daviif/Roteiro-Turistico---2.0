@@ -32,9 +32,9 @@ void preencherCidades(TCidades cidades[]){
                 if(strcmp(cidades[i].nome, cidades[j].nome) == 0){
                     duplicado = true;
                     break;
+                    cidades[i].index_c = i;
                 }
 
-               
             }
         } while(duplicado);
 
@@ -42,6 +42,49 @@ void preencherCidades(TCidades cidades[]){
         for (int j = 0; j < max_e; j++) {
             Armazenar_Eventos(cidades[i].eventos[j].nome);  
             cidades[i].eventos[j].avaliacao = (rand() % 101) / 10.0; 
+            cidades[i].eventos[j].index_e = j;
         }
     }
+}
+
+void *Buscar(char *Nomecidade, TCidades *cidades){
+    
+    for (int i = 0; i < max_c; i++)
+    {
+        if(strcmp(cidades[i].nome, Nomecidade) == 0){
+            printf("Cidade encontrada!\n");
+            printf("%s",cidades[i].nome);
+            
+            printf("\nEventos:\n");
+            for (int j = 0; j < max_e; j++)
+            {
+                printf("%s - Nota: %.1f\n", cidades[i].eventos[j].nome, cidades[i].eventos[j].avaliacao);
+            }
+            
+        }
+    }
+    
+}
+
+void MelhorAv(TCidades *cidades){
+    float melhorEv = 0.0;
+
+    for (int i = 0; i < max_c; i++)
+    {
+        for (int j = 0; j < max_e; j++)
+        {
+            if(cidades[i].eventos[j].avaliacao > melhorEv){
+                melhorEv = cidades[i].eventos[j].avaliacao;
+            }
+        }
+        
+    }
+
+    for (int i = 0; i < max_c; i++)
+    {
+        /* code */
+    }
+    
+    
+
 }
