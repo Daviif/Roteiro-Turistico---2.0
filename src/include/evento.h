@@ -3,12 +3,12 @@
 
 typedef struct {
     char nome[100];
-    int ativo;
     float avaliacao;
-} Evento;
+} TEvento;
 
 
+void Armazenar_Eventos(char *evento);
 
 
-
+ 
 #endif

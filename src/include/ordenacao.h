@@ -1,5 +1,7 @@
-#ifndef _CIDADE_H
-#define _CIDADE_H
+#ifndef _ORDENACAO_H
+#define _ORDENACAO_H
 
+#include "arvore.h"
+ 
 
 #endif 
