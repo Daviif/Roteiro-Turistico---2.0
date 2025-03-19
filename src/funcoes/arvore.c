@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 TNo *criaNo(TItem Item){
     TNo *novo = (TNo *)malloc(sizeof(TNo));
@@ -34,27 +35,13 @@ void Inserir(TNo **x, TNo *pai, TItem Item){
     }
 }
 
-TNo *Pesquisar(TNo *x, TItem Item){
-    if((x == NULL) || (x -> item.cidade.nome == Item.cidade.nome)){
-        return x;
-    }
-
-    if(Item.cidade.nome < x -> item.cidade.nome){
-        return Pesquisar(x -> esq, Item);
-    }
-    else if(Item.cidade.nome > x -> item.cidade.nome){
-        return Pesquisar(x -> dir, Item);
-    }
-    return NULL;
-}
-
 void inOrdem(TNo *x){
     if (x != NULL){
         inOrdem(x -> esq);
         printf("\nCidade: %s\n", x -> item.cidade.nome);
         printf("Eventos: \n");
-        for (int j = 0; j < 3; j++){
-        printf(" %s - Nota: %.1f\n", x -> item.cidade.eventos[j].nome, x -> item.cidade.eventos[j].avaliacao);
+        for (int j = 0; j < max_e; j++){
+            printf("%d. %s - Nota: %.1f\n",x -> item.cidade.eventos[j].index_e + 1, x -> item.cidade.eventos[j].nome, x -> item.cidade.eventos[j].avaliacao);
         }
         inOrdem(x -> dir);
     }
@@ -62,7 +49,10 @@ void inOrdem(TNo *x){
 
 void preOrdem(TNo *x){
     if (x != NULL){
-        printf("Cidade: %s\nEventos: %s - Nota: %.1f.\n\n",x -> item.cidade.nome, x -> item.cidade.eventos[0].nome, x -> item.cidade.eventos[0].avaliacao);
+        printf("\nCidade: %s\n", x -> item.cidade.nome);
+        for (int j = 0; j < max_e; j++){
+            printf("%d. %s - Nota: %.1f\n",x -> item.cidade.eventos[j].index_e + 1, x -> item.cidade.eventos[j].nome, x -> item.cidade.eventos[j].avaliacao);
+        }
         preOrdem(x -> esq);
         preOrdem(x -> dir);
     }
@@ -72,6 +62,9 @@ void posOrdem(TNo *x){
     if (x != NULL){
         posOrdem(x -> esq);
         posOrdem(x -> dir);
-        printf("Cidade: %s\nEventos: %s - Nota: %.1f.\n\n",x -> item.cidade.nome, x -> item.cidade.eventos[0].nome, x -> item.cidade.eventos[0].avaliacao);
+        printf("\nCidade: %s\n", x -> item.cidade.nome);
+        for (int j = 0; j < max_e; j++){
+            printf("%d. %s - Nota: %.1f\n",x -> item.cidade.eventos[j].index_e + 1, x -> item.cidade.eventos[j].nome, x -> item.cidade.eventos[j].avaliacao);
+        }
     }
 }

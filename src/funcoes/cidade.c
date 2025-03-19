@@ -20,8 +20,9 @@ void Armazenar_Cidades(char *cidade){
 }
 
 
-void preencherCidades(TCidades cidades[]){
-    for (int i = 0; i < max_c; i++) {
+void preencherCidades(TCidades *cidades){
+    int i;
+    for (i = 0; i < max_c; i++) {
         bool duplicado;
         
         do {
@@ -32,13 +33,12 @@ void preencherCidades(TCidades cidades[]){
                 if(strcmp(cidades[i].nome, cidades[j].nome) == 0){
                     duplicado = true;
                     break;
-                    cidades[i].index_c = i;
                 }
-
             }
         } while(duplicado);
 
-        
+        cidades[i].index_c = i + 1;
+
         for (int j = 0; j < max_e; j++) {
             Armazenar_Eventos(cidades[i].eventos[j].nome);  
             cidades[i].eventos[j].avaliacao = (rand() % 101) / 10.0; 
@@ -52,13 +52,13 @@ void *Buscar(char *Nomecidade, TCidades *cidades){
     for (int i = 0; i < max_c; i++)
     {
         if(strcmp(cidades[i].nome, Nomecidade) == 0){
-            printf("Cidade encontrada!\n");
+            printf("Cidade encontrada! ");
             printf("%s",cidades[i].nome);
             
             printf("\nEventos:\n");
             for (int j = 0; j < max_e; j++)
             {
-                printf("%s - Nota: %.1f\n", cidades[i].eventos[j].nome, cidades[i].eventos[j].avaliacao);
+                printf("%d. %s - Nota: %.1f\n",cidades[i].eventos[j].index_e + 1, cidades[i].eventos[j].nome, cidades[i].eventos[j].avaliacao);
             }
             
         }
@@ -66,25 +66,36 @@ void *Buscar(char *Nomecidade, TCidades *cidades){
     
 }
 
-void MelhorAv(TCidades *cidades){
-    float melhorEv = 0.0;
+void ListarEvento(TCidades *cidades, int index){
+    printf("\nEventos na cidade de %s:\n", cidades[index].nome);
+    printf("----------------------------------\n");
+    for (int j = 0; j < max_e; j++)
+    {
+        printf("%d. %s - Nota: %.1f\n", cidades[index].eventos[j].index_e + 1, cidades[index].eventos[j].nome, cidades[index].eventos[j].avaliacao);
+    }
+    printf("----------------------------------");
+}
 
+void *Buscar_Eventos(char *NomeEvento, TCidades *cidades){
+    bool encontrado = false;
     for (int i = 0; i < max_c; i++)
     {
+
         for (int j = 0; j < max_e; j++)
         {
-            if(cidades[i].eventos[j].avaliacao > melhorEv){
-                melhorEv = cidades[i].eventos[j].avaliacao;
+            if(strcmp(cidades[i].eventos[j].nome, NomeEvento) == 0){
+                
+                printf("%s",cidades[i].eventos[j].nome);
+                printf(" na cidade de %s", cidades[i].nome);
+                printf(" com avaliação %.1f\n", cidades[i].eventos[j].avaliacao);
+                encontrado = true;
             }
         }
-        
     }
 
-    for (int i = 0; i < max_c; i++)
+    if (!encontrado)
     {
-        /* code */
+        printf("Evento não encontrado\n");
     }
     
-    
-
 }

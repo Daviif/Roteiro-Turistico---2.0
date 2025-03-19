@@ -1,8 +1,8 @@
 #ifndef _CIDADE_H
 #define _CIDADE_H
 
-#define max_c 5
-#define max_e 3
+#define max_c 6
+#define max_e 4
 
 #include "evento.h"
 
@@ -14,8 +14,8 @@ typedef struct cidade{
 
 void Armazenar_Cidades(char *cidade);
 void preencherCidades(TCidades cidade[]);
-
+void ListarEvento(TCidades *cidades, int index);
 void *Buscar(char *Nomecidade, TCidades *cidades);
-void Buscar_Eventos();
+void *Buscar_Eventos();
 
 #endif

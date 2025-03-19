@@ -23,7 +23,7 @@ typedef struct Arvore{
 void inOrdem(TNo *x);
 void preOrdem(TNo *x);
 void posOrdem(TNo *x);
-TNo *Pesquisar(TNo *x, TItem Item);
+TNo *Pesquisar(TNo *x, char Item);
 void Inserir(TNo **x, TNo *pai, TItem Item);
 
 TNo *criaNo(TItem Item);

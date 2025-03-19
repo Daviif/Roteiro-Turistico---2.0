@@ -12,130 +12,122 @@ int main(){
     
     srand(time(NULL));
 
-    TCidades cidades[max_c];
+    TCidades *cidades;
+    cidades = (TCidades *)malloc(max_c * sizeof(TCidades));
     TArvore Arvore;
     Arvore.raiz = NULL;
     bool exit = false;
 
-    printf("Cidades geradas na Arvore.\n");
+    printf("=== SISTEMA DE TURISMO ===\nSeja bem-vindo!\n\n");
 
     preencherCidades(cidades);
 
+    printf("As cidades disponíveis são:\n");
     for (int i = 0; i < max_c; i++) {
         TItem novoItem;
         novoItem.cidade = cidades[i]; 
         Inserir(&Arvore.raiz, NULL, novoItem);
-
-        printf("\nCidade: %s\n", cidades[i].nome);
-        printf("Eventos: \n");
-        for (int j = 0; j < max_e; j++)
-        {
-            printf(" %s - Nota: %.1f\n", cidades[i].eventos[j].nome, cidades[i].eventos[j].avaliacao);
-        }
-        
+        printf("%d. %s\n",cidades[i].index_c, cidades[i].nome);
     }
 
     do
     {
-        printf("\n1 - Visualizacao - Listar em Ordem\n2 - Metodos de Ordenacao\n3 - Buscar na Arvore\n5 - Navegar na arvore\n6 - Sair\n");
+        printf("\n=== MENU ===\n");
+        printf("1 - Listar Eventos\n2 - Visualizar cidades por percurso\n3 - Ordenar os eventos de uma cidade\n"
+        "4 - Buscar Cidade\n5 - Buscar Eventos\n6 - Criar Roteiro Turístico\n7 - Sair\n");
         int opcao;
         scanf("%d", &opcao);
         switch (opcao)
         {
             case 1:
-                printf("1 - Listar inOrdem\n2 - Listar em Pre-Ordem\n3 - Listar em Pos-Ordem\n");
-                int opListar;
-                scanf("%d", &opListar);
-                switch (opListar){
-                    case 1:
-                        inOrdem(Arvore.raiz);
-                        break;
-                    case 2:
-                        preOrdem(Arvore.raiz);
-                        break;
-                    case 3:
-                        posOrdem(Arvore.raiz);
-                        break;
-                    default:
-                        break;
-                }
-                break;
+            printf("Digite o número da cidade que deseja visualizar os eventos: ");
+            int index;
+            scanf("%d", &index);
+            ListarEvento(cidades, index-1);
+            break;
             case 2:
-                printf("\n1 - Bubble Sort\n2 - Selection Sort\n3 - Insertion Sort\n4 - Shell Sort\n5 - Quick Sort\n6 - Merge Sort\n7 - Heap Sort\n");
-                /*int opOrdenar;
-                scanf("%d", &opOrdenar);
-                switch (opOrdenar){
-                    case 1:
-                        BubbleSort(cidades);
-                        break;
-                    case 2:
-                        SelectionSort(cidades);
-                        break;
-                    case 3:
-                        InsertionSort(cidades);
-                        break;
-                    case 4:
-                        ShellSort(cidades);
-                        break;
-                    case 5:
-                        QuickSort(cidades);
-                        break;
-                    case 6:
-                        MergeSort(cidades);
-                        break;
-                    case 7:
-                        HeapSort(cidades);
-                        break;
-                    default:
-                        break;
+            printf("1 - Listar inOrdem\n2 - Listar em Pre-Ordem\n3 - Listar em Pos-Ordem\n");
+            int opListar;
+            scanf("%d", &opListar);
+            switch (opListar){
+                case 1:
+                    inOrdem(Arvore.raiz);
+                    break;
+                case 2:
+                    preOrdem(Arvore.raiz);
+                    break;
+                case 3:
+                    posOrdem(Arvore.raiz);
+                    break;
+                default:
+                    break;
+            }
+            break;
+            case 3:
+            printf("\n1 - Bubble Sort\n2 - Selection Sort\n3 - Insertion Sort\n4 - Shell Sort\n5 - Quick Sort\n6 - Merge Sort\n7 - Heap Sort\n");
+            /*int opOrdenar;
+            scanf("%d", &opOrdenar);
+            switch (opOrdenar){
+                case 1:
+                    BubbleSort(cidades);
+                    break;
+                case 2:
+                    SelectionSort(cidades);
+                    break;
+                case 3:
+                    InsertionSort(cidades);
+                    break;
+                case 4:
+                    ShellSort(cidades);
+                    break;
+                case 5:
+                    QuickSort(cidades);
+                    break;
+                case 6:
+                    MergeSort(cidades);
+                    break;
+                case 7:
+                    HeapSort(cidades);
+                    break;
+                default:
+                    break;
                 }
                 break;*/
-            case 3:
-                printf("Você deseja buscar por:\n1 - Cidade\n2 - Evento\n");
-                int opBuscar;
-                scanf("%d", &opBuscar);
-                getchar();
-                char nome[100];
-                if(opBuscar == 1){
-                    printf("Digite o nome da cidade: ");
-                    fflush(stdin);
-                    fgets(nome, 100, stdin);
-                    if (nome[strlen(nome)-1] == '\n') {
-                        nome[strlen(nome)-1] = '\0';
-                    }
-                    
-                    Buscar(nome, cidades);
-                }
-                else if (opBuscar == 2)
-                {
-                    printf("1 - Melhor Avaliação\n2 - Pior Avaliação\n3 - Tipo\n4 - Nome\n");
-                    int opBuscarEv;
-                    scanf("%d", &opBuscarEv);
-                    switch (opBuscarEv)
-                    {
-                    case 1:
-                        
-                        break;
-                    case 2:
-                        Mergesort(cidades,0, 4);
-                        printf("Eventos ordenados pela pior avaliação\n");
-                        imprimirAvaliacoes(cidades);
-                        break;
-                    case 3:
-                        break;
-                    case 4:
-                        break;
-                    default:
-                        break;
-                    }
-                }
-                
                 break;
             case 4:
+                getchar();
+                char nome[100];
+                printf("Digite o nome da cidade: ");
+                fflush(stdin);
+                fgets(nome, 100, stdin);
+                if (nome[strlen(nome)-1] == '\n'){
+                    nome[strlen(nome)-1] = '\0';
+                }
+                Buscar(nome, cidades);
                 break;
             case 5:
+                
+                printf("Você deseja buscar eventos por:\n1 - Nome\n2 - Avaliação\n");
+                int opBusca;
+                scanf("%d", &opBusca);
+                getchar();
+                if (opBusca == 1){
+                    printf("Digite o nome do Evento: ");
+                    char nomeEvento[100];
+                    fflush(stdin);
+                    fgets(nomeEvento, 100, stdin);
+                    if (nomeEvento[strlen(nomeEvento)-1] == '\n'){
+                        nomeEvento[strlen(nomeEvento)-1] = '\0';
+                    }
+                    Buscar_Eventos(nomeEvento, cidades);
+                }
                 break;
             case 6:
+                break;
+            case 7:
+                printf("Obrigado por utilizar nosso sistema!\n");
+                printf("Tenha uma boa viagem!\n");
+                printf("Até mais!\n");
                 exit = true;
                 break;
         } 
