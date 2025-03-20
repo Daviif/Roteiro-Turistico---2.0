@@ -72,19 +72,19 @@ int main(){
                     Bubble_Sort(cidades);
                     
                     break;
-                /*case 2:
-                    SelectionSort(cidades);
+                case 2:
+                    Selection_Sort(cidades);
                     break;
                 case 3:
-                    InsertionSort(cidades);
+                    Insertion_Sort(cidades);
                     break;
                 case 4:
-                    ShellSort(cidades);
+                    Shell_Sort(cidades);
                     break;
                 case 5:
-                    QuickSort(cidades);
+                    Quick_Sort(cidades, 0, max_e-1);
                     break;
-                case 6:
+                /*case 6:
                     MergeSort(cidades);
                     break;
                 case 7:
