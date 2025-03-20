@@ -65,13 +65,14 @@ int main(){
             break;
             case 3:
             printf("\n1 - Bubble Sort\n2 - Selection Sort\n3 - Insertion Sort\n4 - Shell Sort\n5 - Quick Sort\n6 - Merge Sort\n7 - Heap Sort\n");
-            /*int opOrdenar;
+            int opOrdenar;
             scanf("%d", &opOrdenar);
             switch (opOrdenar){
                 case 1:
-                    BubbleSort(cidades);
+                    Bubble_Sort(cidades);
+                    
                     break;
-                case 2:
+                /*case 2:
                     SelectionSort(cidades);
                     break;
                 case 3:
@@ -90,9 +91,8 @@ int main(){
                     HeapSort(cidades);
                     break;
                 default:
-                    break;
+                    break;*/
                 }
-                break;*/
                 break;
             case 4:
                 getchar();
@@ -120,6 +120,12 @@ int main(){
                         nomeEvento[strlen(nomeEvento)-1] = '\0';
                     }
                     Buscar_Eventos(nomeEvento, cidades);
+                }
+                else if (opBusca == 2){
+                    printf("Digite a avaliação do Evento: (0 a 10)\n");
+                    int avaliacao;
+                    scanf("%d", &avaliacao);
+                    Buscar_EventosA(cidades, avaliacao);
                 }
                 break;
             case 6:

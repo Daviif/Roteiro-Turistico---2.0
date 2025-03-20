@@ -17,5 +17,6 @@ void preencherCidades(TCidades cidade[]);
 void ListarEvento(TCidades *cidades, int index);
 void *Buscar(char *Nomecidade, TCidades *cidades);
 void *Buscar_Eventos();
+void *Buscar_EventosA(TCidades *cidades, int avaliacao);
 
 #endif

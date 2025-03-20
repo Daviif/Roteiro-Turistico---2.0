@@ -56,8 +56,7 @@ void *Buscar(char *Nomecidade, TCidades *cidades){
             printf("%s",cidades[i].nome);
             
             printf("\nEventos:\n");
-            for (int j = 0; j < max_e; j++)
-            {
+            for (int j = 0; j < max_e; j++){
                 printf("%d. %s - Nota: %.1f\n",cidades[i].eventos[j].index_e + 1, cidades[i].eventos[j].nome, cidades[i].eventos[j].avaliacao);
             }
             
@@ -93,9 +92,39 @@ void *Buscar_Eventos(char *NomeEvento, TCidades *cidades){
         }
     }
 
-    if (!encontrado)
-    {
+    if (!encontrado){
         printf("Evento não encontrado\n");
+    }
+    
+}
+
+void *Buscar_EventosA(TCidades *cidades, int avaliacao){
+    bool encontrado = false;
+
+    for (int i = 0; i < max_c; i++){
+        for (int j = 0; j < max_e; j++){
+            if((int)cidades[i].eventos[j].avaliacao == avaliacao){
+                
+                printf("%s",cidades[i].eventos[j].nome);
+                printf(" na cidade de %s", cidades[i].nome);
+                printf(" com avaliação %.1f\n", cidades[i].eventos[j].avaliacao);
+                encontrado = true;
+            }
+        }
+    }
+
+    if (!encontrado){
+        printf("Evento com classificação %d nao encontrado\n", avaliacao);
+        printf("Eventos com classficação proxima:\n");
+        for (int i = 0; i < max_c; i++){
+            for (int j = 0; j < max_e; j++){
+                if((int)cidades[i].eventos[j].avaliacao == avaliacao - 1 || (int)cidades[i].eventos[j].avaliacao == avaliacao + 1){
+                    printf("%s",cidades[i].eventos[j].nome);
+                    printf(" na cidade de %s", cidades[i].nome);
+                    printf(" com avaliação %.1f\n", cidades[i].eventos[j].avaliacao);
+                }
+            }
+        }
     }
     
 }
