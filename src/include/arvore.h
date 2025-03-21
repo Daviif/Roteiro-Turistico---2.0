@@ -25,7 +25,7 @@ void preOrdem(TNo *x);
 void posOrdem(TNo *x);
 TNo *Pesquisar(TNo *x, char Item);
 void Inserir(TNo **x, TNo *pai, TItem Item);
-
+int NumNos(TNo *raiz);
 TNo *criaNo(TItem Item);
 
 #endif 

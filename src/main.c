@@ -127,6 +127,7 @@ int main(){
                 }
                 break;
             case 6:
+                CriarRoteiroViagem(cidades);
                 break;
             case 7:
                 printf("Obrigado por utilizar nosso sistema!\n");

@@ -17,6 +17,14 @@ TNo *criaNo(TItem Item){
     return novo;
 }
 
+int NumNos(TNo *raiz){
+    if (raiz == NULL){
+        return 0;
+    }
+    return 1 + NumNos(raiz -> esq) + NumNos(raiz -> dir);
+    
+}
+
 void Inserir(TNo **x, TNo *pai, TItem Item){
     if((*x) == NULL){
         (*x) = criaNo(Item);
