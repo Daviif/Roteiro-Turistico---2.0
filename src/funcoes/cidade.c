@@ -47,7 +47,7 @@ void preencherCidades(TCidades *cidades){
     }
 }
 
-void *Buscar(char *Nomecidade, TCidades *cidades){
+void Buscar(char *Nomecidade, TCidades *cidades){
     
     for (int i = 0; i < max_c; i++)
     {
@@ -75,7 +75,7 @@ void ListarEvento(TCidades *cidades, int index){
     printf("----------------------------------");
 }
 
-void *Buscar_Eventos(char *NomeEvento, TCidades *cidades){
+void Buscar_Eventos(char *NomeEvento, TCidades *cidades){
     bool encontrado = false;
     for (int i = 0; i < max_c; i++)
     {
@@ -98,7 +98,7 @@ void *Buscar_Eventos(char *NomeEvento, TCidades *cidades){
     
 }
 
-void *Buscar_EventosA(TCidades *cidades, int avaliacao){
+void Buscar_EventosA(TCidades *cidades, int avaliacao){
     bool encontrado = false;
 
     for (int i = 0; i < max_c; i++){

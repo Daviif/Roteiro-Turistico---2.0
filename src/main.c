@@ -70,7 +70,6 @@ int main(){
             switch (opOrdenar){
                 case 1:
                     Bubble_Sort(cidades);
-                    
                     break;
                 case 2:
                     Selection_Sort(cidades);
@@ -82,16 +81,16 @@ int main(){
                     Shell_Sort(cidades);
                     break;
                 case 5:
-                    Quick_Sort(cidades, 0, max_e-1);
+                    Quick_Sort(cidades);
                     break;
-                /*case 6:
-                    MergeSort(cidades);
+                case 6:
+                    Merge_Sort(cidades, 0, max_c - 1);
                     break;
                 case 7:
-                    HeapSort(cidades);
+                    Heap_Sort(cidades);
                     break;
                 default:
-                    break;*/
+                    break;
                 }
                 break;
             case 4:
@@ -106,7 +105,6 @@ int main(){
                 Buscar(nome, cidades);
                 break;
             case 5:
-                
                 printf("Você deseja buscar eventos por:\n1 - Nome\n2 - Avaliação\n");
                 int opBusca;
                 scanf("%d", &opBusca);

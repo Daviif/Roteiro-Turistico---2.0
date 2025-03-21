@@ -61,10 +61,10 @@ void Bubble_Sort(TCidades *cidades){
     for (i = 0; i < max_c; i++){
         for (j = 0; j < max_e - 1; j++){
             for (int k = 0; k < max_e - j - 1; k++){
-                if (cidades[j].eventos[j].avaliacao < cidades[j].eventos[j+1].avaliacao){
-                    aux = cidades[j].eventos[j];
-                    cidades[j].eventos[j] = cidades[j].eventos[j+1];
-                    cidades[j].eventos[j+1] = aux;
+                if (cidades[i].eventos[k].avaliacao < cidades[i].eventos[k+1].avaliacao){
+                    aux = cidades[i].eventos[k];
+                    cidades[i].eventos[k] = cidades[i].eventos[k+1];
+                    cidades[i].eventos[k+1] = aux;
                 }
             }
         }
@@ -131,39 +131,153 @@ void Shell_Sort(TCidades *cidades){
     imprimirAvaliacoes(cidades);
 }
 
-int Particao(TCidades *cidades, int baixo, int alto){
-    float pivor;
-    pivor = cidades[0].eventos[alto].avaliacao;
+int Particao(TEvento *eventos, int baixo, int alto) {
+    float pivo = eventos[alto].avaliacao;
     int i = baixo - 1;
-
-
-        for (int j = baixo; j < alto; j++){
-            if(cidades[0].eventos[j].avaliacao >= pivor){
-                i++;
-                TEvento aux = cidades[0].eventos[k];
-                cidades[0].eventos[i] = cidades[0].eventos[j];
-                cidades[0].eventos[j] = aux;
-            }
+    
+    for (int j = baixo; j < alto; j++) {
+        if (eventos[j].avaliacao >= pivo) {
+            i++;
+    
+            TEvento aux = eventos[i];
+            eventos[i] = eventos[j];
+            eventos[j] = aux;
         }
-    
-    
-    TEvento aux = cidades[0].eventos[i + 1];
-    cidades[0].eventos[i + 1] = cidades[0].eventos[alto];
-    cidades[0].eventos[alto] = aux;
+    }
 
+    TEvento aux = eventos[i + 1];
+    eventos[i + 1] = eventos[alto];
+    eventos[alto] = aux;
+    
     return i + 1;
 }
 
-void Quick_Sort(TCidades *cidades, int baixo, int alto){
+void QuickSortEv(TEvento *eventos, int baixo, int alto) {
+    if (baixo < alto) {
+        int pi = Particao(eventos, baixo, alto);
+        
+        QuickSortEv(eventos, baixo, pi - 1);
+        QuickSortEv(eventos, pi + 1, alto);
+    }
+}
+
+void Quick_Sort(TCidades *cidades) {
     Bubble_SortCi(cidades);
-
-    if (baixo < alto){
-        int pi = Particao(cidades, baixo, alto);
-
-        Quick_Sort(cidades, baixo, pi-1);
-        Quick_Sort(cidades, pi+1, alto);
+    
+    for (int i = 0; i < max_c; i++) {
+        QuickSortEv(cidades[i].eventos, 0, max_e - 1);
     }
     
+    imprimirAvaliacoes(cidades);
+}
+void Merge(TEvento *eventos, int esq, int meio, int dir){
+    int tam1 = meio - esq + 1;
+    int tam2 = dir - meio;
+
+    TEvento *metEsq = (TEvento*)malloc(tam1 * sizeof(TEvento));
+    TEvento *metDir = (TEvento*)malloc(tam2 * sizeof(TEvento));
+
+    for (int i = 0; i < tam1; i++){
+        metEsq[i] = eventos[esq + i];
+    }
+    for(int j = 0; j < tam2; j++){
+        metDir[j] = eventos[meio + 1 + j];
+    }
+
+    int i = 0, j = 0, k = esq;
+
+    while (i < tam1 && j < tam2){
+        if (metEsq[i].avaliacao >= metDir[j].avaliacao){
+            eventos[k] = metEsq[i];
+            i++;
+        }
+        else{
+            eventos[k] = metDir[j];
+            j++;
+        }
+        k++;
+    }
+    
+    while (i < tam1){
+        eventos[k] = metEsq[i];
+        i++;
+        k++;
+    }
+    
+    while (j < tam2){
+        eventos[k] = metDir[j];
+        j++;
+        k++;
+    }
+
+    free(metEsq);
+    free(metDir);
+}
+
+void MergeSortEv(TCidades *cidades, int esq, int dir){
+
+    if(esq < dir){
+        int meio = esq + (dir - esq) / 2;
+
+        MergeSortEv(cidades, esq, meio);
+        MergeSortEv(cidades, meio + 1, dir);
+
+        Merge(cidades->eventos, esq, meio, dir);
+    }
+}
+
+void Merge_Sort(TCidades *cidades, int esq, int dir){
+    Bubble_SortCi(cidades);
+
+    for (int i = 0; i < max_c; i++){
+        MergeSortEv(cidades, esq, dir);
+    }
+
+    imprimirAvaliacoes(cidades);
+}
+
+void Empilhar(TEvento *eventos, int n, int i){
+    int menor = i;
+    int esq = 2 * i + 1;
+    int dir = 2 * i + 2;
+
+    if(esq < n && eventos[esq].avaliacao < eventos[menor].avaliacao){
+        menor = esq;
+    }
+
+    if(dir < n && eventos[dir].avaliacao < eventos[menor].avaliacao){
+        menor = dir;
+    }
+
+    if(menor != i){
+        TEvento aux = eventos[i];
+        eventos[i] = eventos[menor];
+        eventos[menor] = aux;
+
+        Empilhar(eventos, n, menor);
+    }
+}
+
+void HeapSortEv(TEvento *eventos){
+    for(int i = max_e / 2 - 1; i >= 0; i--){
+        Empilhar(eventos, max_e, i);
+    }
+
+    for(int i = max_e - 1; i > 0; i--){
+        TEvento aux = eventos[0];
+        eventos[0] = eventos[i];
+        eventos[i] = aux;
+
+        Empilhar(eventos, i, 0);
+    }
+}
+
+void Heap_Sort(TCidades *cidades){
+    Bubble_SortCi(cidades);
+
+    for (int i = 0; i < max_c; i++){
+        HeapSortEv(cidades[i].eventos);
+    }
 
     imprimirAvaliacoes(cidades);
 }
