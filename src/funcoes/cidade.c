@@ -106,6 +106,7 @@ void RemoverRoteiro(TCidades *cidades,int *tamanho, int index_c){
 
 
 void processar(TCidades *cidades, int *tamanho, char *input){
+    TArvore Arvore;
 
     if(isdigit(input[0])){
         int index_c = atoi(input);
@@ -120,10 +121,11 @@ void processar(TCidades *cidades, int *tamanho, char *input){
         int encontrou = -1; 
         for (int i = 0; i < max_c; i++)
         {
-            if(strcasecmp(cidades[i].nome, input) == 0){
+            Pesquisar(Arvore.raiz, input);
+            if (Pesquisar != NULL){
                 encontrou = i;
-                break;
             }
+            
         }
         if(encontrou != -1){
             RemoverRoteiro(cidades, tamanho, encontrou);
