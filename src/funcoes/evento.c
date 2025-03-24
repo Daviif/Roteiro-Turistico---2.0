@@ -5,18 +5,22 @@
 
 void Armazenar_Eventos(char *evento){
     char *eventos[] = {
-        "Show de Rock", "Festa Junina", "Corrida de Rua", "Feira de Tecnologia", "Campeonato de Xadrez",
-        "Festival de Cinema", "Teatro ao Ar Livre", "Palestra Motivacional", "Workshop de Fotografia", "Hackathon",
-        "Concerto de Orquestra", "Aula de Yoga", "Lançamento de Livro", "Campeonato de Futebol", "Maratona de Programação",
-        "Feira de Empregos", "Stand-up Comedy", "Exposição de Arte", "Aula de Culinária", "Competição de Robótica",
-        "Show de Stand-up", "Corrida de Bicicleta", "Feira de Games", "Palestra sobre Inteligência Artificial", "Show de Mágica",
-        "Competição de Dança", "Workshop de Pintura", "Festival de Gastronomia", "Treinamento Empresarial", "Conferência de Ciência",
-        "Campeonato de E-Sports", "Feira de Quadrinhos", "Palestra sobre Sustentabilidade", "Feira de Antiguidades", "Desafio de Startups",
-        "Festival de Música", "Evento de Networking", "Palestra sobre Saúde Mental", "Corrida de Obstáculos", "Exibição de Documentários",
-        "Sarau Literário", "Competição de Canto", "Feira de Empreendedorismo", "Aula de Defesa Pessoal", "Festival de Dança",
-        "Desafio de Matemática", "Treinamento de Liderança", "Festival de Cultura Pop", "Aula de Meditação", "Batalha de Bandas",
-        "Competição de Cosplay", "Feira de Automóveis", "Corrida de Drones", "Festival de Jazz", "Competição de Memória",
-        "Feira de Vinhos", "Palestra sobre Astronomia", "Competição de Programação", "Exposição de Fotografia", "Simulação de Bolsa de Valores"
+        "Corrida de Rua", "Campeonato de Mountain Bike", "Torneio de Futebol Amador", "Maratona",
+        "Campeonato de Skate", "Hackathon de Startups", "Feira de Tecnologia e Inovacao", "Workshop de Inteligencia Artificial",
+        "Conferencia de Robotica", "Simposio de Programacao","Exposicao de Arte Contemporanea", "Sarau Literario",
+        "Mostra de Fotografia", "Competicao de Cosplay", "Festival de Danca Folclorica", "Palestra sobre Sustentabilidade",
+        "Feira de Empreendedorismo", "Treinamento de Lideranca", "Workshop de Gestao Empresarial", "Conferencia de Saude Mental",
+        "Feira de Vinhos", "Festival de Cerveja Artesanal", "Competicao de Culinaria", "Feira de Produtos Organicos", "Festival de Gastronomia Mineira",
+        "Show de Stand-up", "Concerto de Orquestra", "Show de Magica", "Batalha de Bandas", "Festival de Musica Eletronica", "Feira de Antiguidades",
+        "Corrida de Drones", "Exibicao de Documentarios", "Simulacao de Bolsa de Valores", "Competicao de Memoria",
+        "Aula de Yoga ao Ar Livre", "Workshop de Meditacao", "Treinamento de Defesa Pessoal", "Corrida de Obstaculos", "Palestra sobre Nutricao e Saude",
+        "Campeonato de Volei de Praia", "Torneio de Tenis", "Corrida de Aventura", "Campeonato de Natacao", "Torneio de Basquete", "Feira de Startups",
+        "Workshop de Realidade Virtual", "Conferencia de Ciberseguranca", "Simposio de Big Data", "Hackathon de Desenvolvimento de Jogos", "Exposicao de Esculturas",
+        "Festival de Teatro de Rua", "Mostra de Cinema Independente", "Competicao de Grafite", "Festival de Musica Classica", "Palestra sobre Marketing Digital",
+        "Feira de Carreiras", "Workshop de Financas Pessoais", "Conferencia de Educacao", "Treinamento de Vendas", "Feira de Queijos e Vinhos", "Festival de Comida de Rua",
+        "Competicao de Baristas", "Feira de Produtos Artesanais", "Festival de Doces Mineiros", "Show de Ilusionismo", "Concerto de Musica de Camara", "Show de Humor",
+        "Festival de Musica Indie", "Festival de Cultura Pop", "Feira de Livros", "Competicao de Robotica", "Exibicao de Curtas-Metragens", "Simulacao de Negociacoes Internacionais",
+        "Competicao de Debates", "Aula de Pilates ao Ar Livre", "Workshop de Aromaterapia", "Treinamento de Primeiros Socorros", "Corrida Noturna", "Palestra sobre Saude Preventiva"
     };
     int numEventos = sizeof(eventos) / sizeof(eventos[0]);
     

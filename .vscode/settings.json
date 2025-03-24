@@ -4,6 +4,8 @@
         "string.h": "c",
         "stdbool.h": "c",
         "cidade.h": "c",
-        "ordenacao.h": "c"
+        "ordenacao.h": "c",
+        "evento.h": "c",
+        "stdio.h": "c"
     }
 }

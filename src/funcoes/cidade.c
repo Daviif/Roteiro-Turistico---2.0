@@ -5,14 +5,14 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <ctype.h>
 
 void Armazenar_Cidades(char *cidade){
-    char *cidades[] =   { "Sao Paulo", "Rio de Janeiro", "Belo Horizonte", "Brasilia", "Salvador",
-        "Curitiba", "Fortaleza", "Recife", "Porto Alegre", "Manaus", "Belem", "Goiania", "Florianopolis", 
-        "Vitoria", "Cuiaba", "Joao Pessoa", "Teresina", "Natal", "Aracaju", "Maceio", "Porto Velho", 
-        "Rio Branco", "Macapa", "Boa Vista", "Palmas", "Paris", "Londres", "Nova York", "Toquio", "Pequim",
-        "Sydney", "Cidade do Mexico", "Toronto", "Barcelona", "Roma", "Amsterda", "Berlim", "Viena", "Praga", 
-        "Lisboa"};
+    char *cidades[] =   {"Betim", "Uberlandia", "Juiz de Fora", "Ouro Preto", "Montes Claros", "Patos de Minas", 
+    "Divinopolis", "Ipatinga", "Muriae", "Uberaba", "Contagem", "Sabara", "Nova Lima", "Teofilo Otoni", "Varginha",
+    "Sete Lagoas", "Lavras", "Araxa", "Pocos de Caldas", "Governador Valadares", "Passos", "Ituiutaba", "Barbacena",
+    "Sao Joao del Rei", "Januaria", "Carangola", "Curvelo", "Alfenas", "Araguari", "Pirapora", "Sao Gotardo",
+    "Tres Coracoes", "Diamantina", "Capelinha", "Manhuacu", "Santa Luzia", "Ouro Branco", "Paracatu", "Almenara", "Itabira"};
 
     int numCidades = sizeof(cidades) / sizeof(cidades[0]);
 
@@ -48,23 +48,6 @@ void preencherCidades(TCidades *cidades){
     }
 }
 
-void Buscar(char *Nomecidade, TCidades *cidades){
-    
-    for (int i = 0; i < max_c; i++)
-    {
-        if(strcmp(cidades[i].nome, Nomecidade) == 0){
-            printf("Cidade encontrada! ");
-            printf("%s",cidades[i].nome);
-            
-            printf("\nEventos:\n");
-            for (int j = 0; j < max_e; j++){
-                printf("%d. %s - Nota: %.1f\n",cidades[i].eventos[j].index_e + 1, cidades[i].eventos[j].nome, cidades[i].eventos[j].avaliacao);
-            }
-            
-        }
-    }
-    
-}
 
 void ListarEvento(TCidades *cidades, int index){
     printf("\nEventos na cidade de %s:\n", cidades[index].nome);
@@ -76,28 +59,6 @@ void ListarEvento(TCidades *cidades, int index){
     printf("----------------------------------");
 }
 
-void Buscar_Eventos(char *NomeEvento, TCidades *cidades){
-    bool encontrado = false;
-    for (int i = 0; i < max_c; i++)
-    {
-
-        for (int j = 0; j < max_e; j++)
-        {
-            if(strcmp(cidades[i].eventos[j].nome, NomeEvento) == 0){
-                
-                printf("%s",cidades[i].eventos[j].nome);
-                printf(" na cidade de %s", cidades[i].nome);
-                printf(" com avaliação %.1f\n", cidades[i].eventos[j].avaliacao);
-                encontrado = true;
-            }
-        }
-    }
-
-    if (!encontrado){
-        printf("Evento não encontrado\n");
-    }
-    
-}
 
 void Buscar_EventosA(TCidades *cidades, int avaliacao){
     bool encontrado = false;
@@ -130,7 +91,51 @@ void Buscar_EventosA(TCidades *cidades, int avaliacao){
     
 }
 
+void RemoverRoteiro(TCidades *cidades,int *tamanho, int index_c){
+    for(int i = index_c; i < tamanho - 1; i++){
+        cidades[i] = cidades[i + 1];
+    }
+    (*tamanho)--;
+    printf("Cidade %s removida do roteiro.\n",cidades[index_c].nome);
+
+    printf("Roteiro atualizado:\n");
+    for (int i = 0; i < *tamanho; i++) {
+        printf("%d. %s\n", cidades[i].index_c, cidades[i].nome);
+    }
+}
+
+
+void processar(TCidades *cidades, int *tamanho, char *input){
+
+    if(isdigit(input[0])){
+        int index_c = atoi(input);
+        if (index_c >= 0 && index_c < *tamanho){
+            RemoverRoteiro(cidades, tamanho, index_c);
+        }
+        else{
+            printf("Indice invalido!");
+        }
+    }
+    else{
+        int encontrou = -1; 
+        for (int i = 0; i < max_c; i++)
+        {
+            if(strcasecmp(cidades[i].nome, input) == 0){
+                encontrou = i;
+                break;
+            }
+        }
+        if(encontrou != -1){
+            RemoverRoteiro(cidades, tamanho, encontrou);
+        }
+        else{
+            printf("Cidade n�o encontrada");
+        }
+        
+    }
+}
 void CriarRoteiroViagem(TCidades *cidades){
+    int tamanho = max_c;
     printf("Deseja ver a nossa sugestão de roteiro de viagem?(Sim/Não)\n");
     char esc[4];
     fflush(stdin);
@@ -161,17 +166,39 @@ void CriarRoteiroViagem(TCidades *cidades){
             printf("1 - Remover cidade\n2 - Trocar cidade\n");
             int op;
             scanf("%d", &op);
+            getchar();
+
+
             if (op == 1){
+                TCidades Roteiro[tamanho];
+                for (int i = 0; i < max_c; i++){
+                    Roteiro[i] = cidades[i];
+                }
+
+                int cidadesc[100];
+                printf("Essas s�o as cidades e indices.\n");
+                for (int i = 0; i < max_c; i++){
+                    printf("%d. %s\n", Roteiro[i].index_c, Roteiro[i].nome);
+                }
+                printf("Digite qual cidade deseja remover(Indice ou Nome): ");
+                fgets(cidadesc, 100, stdin);
+                if (cidadesc[strlen(cidadesc)-1] == '\n'){
+                    cidadesc[strlen(cidadesc)-1] = '\0';
+                }
+
+                processar(Roteiro, &tamanho, cidadesc);
 
             }
-            
+            else if (op == 2){
+
+            }
         }
         else{
-            printf("Opção inválida!\n");
+            printf("Op��o invalida!\n");
         }
 
     }
-    else if(strcmp(esc, "Não") == 0){
+    else if(strcmp(esc, "N�o") == 0){
         printf("Tudo bem! Crie o seu próprio roteiro a seguir!\n");
 
         int numSelecionar;

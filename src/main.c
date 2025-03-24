@@ -8,9 +8,13 @@
 #include <time.h>
 #include <string.h>
 #include <stdbool.h>
+#include <locale.h>
+
+
 int main(){
     
     srand(time(NULL));
+    setlocale(LC_ALL, "pt_BR.utf8");
 
     TCidades *cidades;
     cidades = (TCidades *)malloc(max_c * sizeof(TCidades));
@@ -40,7 +44,7 @@ int main(){
         switch (opcao)
         {
             case 1:
-            printf("Digite o número da cidade que deseja visualizar os eventos: ");
+            printf("Digite o n�mero da cidade que deseja visualizar os eventos: ");
             int index;
             scanf("%d", &index);
             ListarEvento(cidades, index-1);
@@ -102,10 +106,12 @@ int main(){
                 if (nome[strlen(nome)-1] == '\n'){
                     nome[strlen(nome)-1] = '\0';
                 }
-                Buscar(nome, cidades);
+                
+                Pesquisar(Arvore.raiz, nome);
+
                 break;
             case 5:
-                printf("Você deseja buscar eventos por:\n1 - Nome\n2 - Avaliação\n");
+                printf("Voc� deseja buscar eventos por:\n1 - Nome\n2 - Avalia��o\n");
                 int opBusca;
                 scanf("%d", &opBusca);
                 getchar();
@@ -117,10 +123,17 @@ int main(){
                     if (nomeEvento[strlen(nomeEvento)-1] == '\n'){
                         nomeEvento[strlen(nomeEvento)-1] = '\0';
                     }
-                    Buscar_Eventos(nomeEvento, cidades);
+
+                    TNo *x = PesquisarEv(Arvore.raiz, nomeEvento);
+
+                    if (x == NULL){
+                        printf("Evento n�o encontrado! Que pena!\n");
+                        printf("Verifique se ele está realmente disponível.\n");
+                    }
+                    
                 }
                 else if (opBusca == 2){
-                    printf("Digite a avaliação do Evento: (0 a 10)\n");
+                    printf("Digite a avalia��o do Evento: (0 a 10)\n");
                     int avaliacao;
                     scanf("%d", &avaliacao);
                     Buscar_EventosA(cidades, avaliacao);
@@ -132,7 +145,7 @@ int main(){
             case 7:
                 printf("Obrigado por utilizar nosso sistema!\n");
                 printf("Tenha uma boa viagem!\n");
-                printf("Até mais!\n");
+                printf("At� mais!\n");
                 exit = true;
                 break;
         } 

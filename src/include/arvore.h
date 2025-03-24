@@ -23,9 +23,11 @@ typedef struct Arvore{
 void inOrdem(TNo *x);
 void preOrdem(TNo *x);
 void posOrdem(TNo *x);
-TNo *Pesquisar(TNo *x, char Item);
+TNo *Pesquisar(TNo *x, char *NomeCidade);
+TNo *PesquisarEv(TNo *x, char *NomeCidade);
 void Inserir(TNo **x, TNo *pai, TItem Item);
 int NumNos(TNo *raiz);
 TNo *criaNo(TItem Item);
+char *converterString(char *Texto);
 
 #endif 
