@@ -5,14 +5,16 @@
 #include <stdbool.h>
 
 void imprimirAvaliacoes(TCidades *cidades) {
+    
     for (int i = 0; i < max_c; i++){
+        printf("---------------------------------------------\n");
         printf("%d. %s;\n",cidades[i].index_c, cidades[i].nome);
         for (int j = 0; j < max_e; j++){
             printf("%s - Nota: %.1f\n", cidades[i].eventos[j].nome, cidades[i].eventos[j].avaliacao);
         }
+        printf("---------------------------------------------");
         printf("\n");
     }
-    
 }
 
 float mediaAvaliacoes(TCidades cidades){
@@ -42,6 +44,9 @@ void Bubble_SortCi(TCidades *cidades){
                 aux = cidades[j];
                 cidades[j] = cidades[j+1];
                 cidades[j+1] = aux;
+
+                cidades[j].index_c = j + 1;
+                cidades[j + 1].index_c = j + 2;
             }
         }
     }
@@ -69,7 +74,6 @@ void Bubble_Sort(TCidades *cidades){
             }
         }
     }
-
     imprimirAvaliacoes(cidades);
 }
 
@@ -89,7 +93,6 @@ void Selection_Sort(TCidades *cidades){
             cidades[i].eventos[max] = aux;
         }
     }
-
     imprimirAvaliacoes(cidades);
 }
 
@@ -107,13 +110,11 @@ void Insertion_Sort(TCidades *cidades){
             cidades[i].eventos[k+1] = aux;
         }
     }
-
     imprimirAvaliacoes(cidades);
 }
 
 void Shell_Sort(TCidades *cidades){
     Bubble_SortCi(cidades);
-
     for (int i = 0; i < max_c; i++){
         for (int gap = max_e/2; gap > 0; gap /= 2){
             for (int j = gap; j < max_e; j++){
@@ -130,7 +131,6 @@ void Shell_Sort(TCidades *cidades){
 
     imprimirAvaliacoes(cidades);
 }
-
 int Particao(TEvento *eventos, int baixo, int alto) {
     float pivo = eventos[alto].avaliacao;
     int i = baixo - 1;

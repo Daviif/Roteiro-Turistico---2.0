@@ -26,3 +26,18 @@ void Armazenar_Eventos(char *evento){
     
     strcpy(evento, eventos[rand() % numEventos]);
 } 
+
+void Mensagens_Especiais(){
+    char *mensagens[] = {
+        "Dica: Priorize os eventos com avaliações acima de 9.0",
+        "Super Dica: Reserve ingressos para shows com notas acima de 9.0!",
+        "Imperdível: Mostra de Arte Contemporânea – Altamente recomendada!",
+        "Programe-se: Exposição Fotográfica – Encante-se com as imagens!",
+        "Evento Top: Festival de Música – Imperdível!",
+        "Lembre-se: Eventos ao ar livre podem ser afetados pelo clima!",
+        "Economia: Reserve seus ingressos com antecedência para garantir melhores preços!"
+    };
+
+    int indice = rand() % 7;
+    printf("\nMENSAGEM ESPECIAL: %s\n", mensagens[indice]);
+}
